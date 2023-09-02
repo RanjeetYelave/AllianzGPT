@@ -10,4 +10,5 @@ import lombok.Setter;
 public class AnswerDTO {
 	private int answerId;
 	private String Answer;
+	private QuestionDTO question;
 }

@@ -5,14 +5,18 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gpt.allianz.DTO.AnswerDTO;
 import com.gpt.allianz.Exceptions.NotFoundEx;
 import com.gpt.allianz.Exceptions.ResponseHandler;
 import com.gpt.allianz.entity.AnswerEntity;
+import com.gpt.allianz.entity.QuestionEntity;
 import com.gpt.allianz.repo.AnswerRepo;
+import com.gpt.allianz.repo.QuestionRepo;
 import com.gpt.allianz.service.AnswerService;
 
+@Service
 public class AnswerServiceImpl implements AnswerService {
 
 	@Autowired
@@ -21,9 +25,15 @@ public class AnswerServiceImpl implements AnswerService {
 	@Autowired
 	ModelMapper modelMapper;
 
+	@Autowired
+	QuestionRepo questionRepo;
+
 	@Override
-	public AnswerDTO createAnswer(AnswerDTO answerDTO) {
+	public AnswerDTO createAnswer(AnswerDTO answerDTO, Integer QuestionId) {
 		AnswerEntity answerEntity = modelMapper.map(answerDTO, AnswerEntity.class);
+		QuestionEntity foundQuestionEntity = questionRepo.findById(QuestionId)
+				.orElseThrow(() -> new NotFoundEx("Question Not found", false));
+		answerEntity.setQuestion(foundQuestionEntity);
 		AnswerEntity savedAnswerEntity = answerRepo.save(answerEntity);
 		return modelMapper.map(savedAnswerEntity, AnswerDTO.class);
 	}

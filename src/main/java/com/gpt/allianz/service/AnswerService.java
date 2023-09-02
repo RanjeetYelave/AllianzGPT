@@ -6,7 +6,7 @@ import com.gpt.allianz.DTO.AnswerDTO;
 import com.gpt.allianz.Exceptions.ResponseHandler;
 
 public interface AnswerService {
-	AnswerDTO createAnswer(AnswerDTO answerDTO);
+	AnswerDTO createAnswer(AnswerDTO answerDTO, Integer QuestionId);
 	// answerUpdationisForbiddenByDefault
 	// AnswerDTO updateAnswerDTO(AnswerDTO anseAnswerDTO, Integer answerId);
 
