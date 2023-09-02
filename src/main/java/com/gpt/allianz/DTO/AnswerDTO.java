@@ -7,11 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class QuestionDTO {
-
-	private int id;
-	private String question;
-	private String date;
-	private String time;
-	private AnswerDTO answer;
+public class AnswerDTO {
+	private int answerId;
+	private String Answer;
 }
