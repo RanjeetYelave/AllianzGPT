@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gpt.allianz.DTO.QuestionDTO;
@@ -53,6 +54,11 @@ public class QuestionController {
 	ResponseEntity<ResponseHandler> deleteQuestion(@PathVariable Integer QId) {
 		ResponseHandler response = questionService.deleteQuestion(QId);
 		return new ResponseEntity<ResponseHandler>(response, HttpStatus.GONE);
+	}
+
+	@GetMapping("/search")
+	public List<QuestionDTO> searchQuestions(@RequestParam String keyword) {
+		return questionService.searchQuestionsByKeyword(keyword);
 	}
 
 }

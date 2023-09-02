@@ -65,4 +65,12 @@ public class QuestionServiceImpl implements QuestionService {
 		return new ResponseHandler("Question Deleted", true);
 	}
 
+	public List<QuestionDTO> searchQuestionsByKeyword(String keyword) {
+		List<QuestionEntity> searchByKeyword = questionRepo.searchByKeyword(keyword);
+		List<QuestionDTO> listofDtos = searchByKeyword.stream()
+				.map(Qentity -> modelMapper.map(Qentity, QuestionDTO.class)).collect(Collectors.toList());
+		return listofDtos;
+
+	}
+
 }
