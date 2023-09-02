@@ -54,4 +54,11 @@ public class AnswerServiceImpl implements AnswerService {
 		return allAnswerDTOs;
 	}
 
+	public List<AnswerDTO> findAllAnswersByQuestionId(int questionId) {
+		List<AnswerEntity> findAllAnswersByQuestionId = answerRepo.findAllAnswersByQuestionId(questionId);
+		List<AnswerDTO> listofAnswerDTOs = findAllAnswersByQuestionId.stream()
+				.map(eachAnswer -> modelMapper.map(eachAnswer, AnswerDTO.class)).collect(Collectors.toList());
+		return listofAnswerDTOs;
+	}
+
 }
