@@ -13,5 +13,5 @@ public class QuestionDTO {
 	private String question;
 	private String date;
 	private String time;
-	private AnswerDTO answer;
+
 }

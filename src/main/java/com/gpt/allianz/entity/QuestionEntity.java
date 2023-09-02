@@ -29,6 +29,6 @@ public class QuestionEntity {
 	private String time;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<AnswerEntity> answers = new ArrayList<>();
+	private List<AnswerEntity> answer = new ArrayList<>();
 
 }
