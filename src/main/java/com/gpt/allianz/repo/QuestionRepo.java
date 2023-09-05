@@ -13,4 +13,5 @@ import com.gpt.allianz.entity.QuestionEntity;
 public interface QuestionRepo extends JpaRepository<QuestionEntity, Integer> {
 	@Query(value = "SELECT * FROM question_entity WHERE question LIKE %:keyword%", nativeQuery = true)
 	List<QuestionEntity> searchByKeyword(@Param("keyword") String keyword);
+
 }

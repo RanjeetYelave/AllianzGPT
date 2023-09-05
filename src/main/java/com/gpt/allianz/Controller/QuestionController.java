@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gpt.allianz.DTO.QuestionDTO;
 import com.gpt.allianz.Exceptions.ResponseHandler;
+import com.gpt.allianz.entity.AnswerEntity;
 import com.gpt.allianz.serviceImpl.QuestionServiceImpl;
 
 @RestController
@@ -60,6 +61,11 @@ public class QuestionController {
 	@GetMapping("/search")
 	public List<QuestionDTO> searchQuestions(@RequestParam String keyword) {
 		return questionService.searchQuestionsByKeyword(keyword);
+	}
+
+	@GetMapping("/search/")
+	public List<AnswerEntity> searchQuestionAndAnswersByKeyword(@RequestParam String keyword) {
+		return questionService.allQnaByKeywords(keyword);
 	}
 
 }

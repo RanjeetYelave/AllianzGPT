@@ -11,4 +11,7 @@ import com.gpt.allianz.entity.AnswerEntity;
 public interface AnswerRepo extends JpaRepository<AnswerEntity, Integer> {
 	@Query("SELECT a FROM AnswerEntity a WHERE a.question.id = :questionId")
 	List<AnswerEntity> findAllAnswersByQuestionId(@Param("questionId") int questionId);
+
+	@Query("SELECT a FROM AnswerEntity a WHERE a.question.question LIKE %:keyword%")
+	List<AnswerEntity> findAllAnswersByKeyword(String keyword);
 }

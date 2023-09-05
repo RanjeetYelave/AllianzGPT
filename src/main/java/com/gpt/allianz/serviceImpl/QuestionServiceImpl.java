@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.gpt.allianz.DTO.QuestionDTO;
 import com.gpt.allianz.Exceptions.NotFoundEx;
 import com.gpt.allianz.Exceptions.ResponseHandler;
+import com.gpt.allianz.entity.AnswerEntity;
 import com.gpt.allianz.entity.QuestionEntity;
+import com.gpt.allianz.repo.AnswerRepo;
 import com.gpt.allianz.repo.QuestionRepo;
 import com.gpt.allianz.service.QuestionService;
 
@@ -21,7 +23,13 @@ public class QuestionServiceImpl implements QuestionService {
 	QuestionRepo questionRepo;
 
 	@Autowired
+	AnswerRepo answerRepo;
+
+	@Autowired
 	ModelMapper modelMapper;
+
+	@Autowired
+	AnswerServiceImpl answerService;
 
 	@Override
 	public QuestionDTO getQuestion(Integer QId) {
@@ -71,6 +79,11 @@ public class QuestionServiceImpl implements QuestionService {
 				.map(Qentity -> modelMapper.map(Qentity, QuestionDTO.class)).collect(Collectors.toList());
 		return listofDtos;
 
+	}
+
+	public List<AnswerEntity> allQnaByKeywords(String Keyword) {
+		List<AnswerEntity> findAllAnswersByKeyword = answerRepo.findAllAnswersByKeyword(Keyword);
+		return findAllAnswersByKeyword;
 	}
 
 }
